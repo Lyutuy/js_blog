@@ -1,16 +1,22 @@
 {
-  "name": "js-native-blog",
-  "version": "1.0.0",
-  "description": "native js app blog ",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "js",
-    "blog",
-    "node.js"
-  ],
-  "author": "Liutyi_V",
-  "license": "ISC"
+    "name": "js-native-blog",
+    "version": "1.0.0",
+    "description": "My webpack project",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack"
+    },
+    "keywords": [
+        "js",
+        "blog",
+        "node.js"
+    ],
+    "author": "Liutyi_V",
+    "license": "ISC",
+    "devDependencies": {
+        "webpack": "^4.41.6",
+        "webpack-cli": "^4.0.0-beta.2",
+        "webpack-dev-server": "^3.10.3"
+    }
 }

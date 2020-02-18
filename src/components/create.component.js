@@ -12,7 +12,7 @@ export class CreateComponent extends Component {
 
         this.form = new Form(this.$el, {
             title: [Validators.require],
-            fulltext: [Validators.require, Validators.minLength(8)]
+            fulltext: [Validators.require, Validators.minLength(2)]
         });
     }
 }
@@ -25,6 +25,9 @@ function submitHandler(event) {
             type: this.$el.type.value,
             ...this.form.value()
         }
+
+        this.form.clear();
+
         console.log('Submit', formData);
     }
 }

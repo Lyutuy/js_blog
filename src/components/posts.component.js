@@ -8,6 +8,10 @@ export class PostsComponent extends Component {
         this.loader = loader;
     }
 
+    init() {
+        this.$el.addEventListener('click', buttonHandler.bind(this));
+    }
+
     async onShow() {
         this.loader.show();
         const fbData = await apiService.fetchPosts();
@@ -22,12 +26,16 @@ export class PostsComponent extends Component {
     }
 }
 
+
+
 function renderPost(post) {
     const tag = post.type === 'news' ?
         '<li class="tag tag-blue tag-rounded">Новость</li>' :
         '<li class="tag tag-rounded">Заметка</li>';
 
-    const button = '<button class="button-round button-small button-primary">Сохранить</button>'
+    const button = (JSON.parse(localStorage.getItem('favorites')) || []).includes(post.id) ?
+        `<button class="button-round button-small button-danger" data-id="${post.id}">Удалить</button>` :
+        `<button class="button-round button-small button-primary" data-id="${post.id}">Сохранить</button>`;
     return `
         <div class="panel">
             <div class="panel-head">
@@ -45,4 +53,29 @@ function renderPost(post) {
             </div>
         </div>
     `
+}
+
+function buttonHandler(evet) {
+    const $el = event.target;
+    const id = $el.dataset.id;
+
+    if (id) {
+        let favoriets = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (favoriets.includes(id)) {
+            //del element
+            $el.textContent = 'Сохранить';
+            $el.classList.add('button-primary');
+            $el.classList.remove('button-danger');
+            favoriets = favoriets.filter(fID => fID !== id)
+        } else {
+            //add element
+            $el.textContent = 'Удалить';
+            $el.classList.remove('button-primary');
+            $el.classList.add('button-danger');
+            favoriets.push(id);
+        }
+        //save id in Local Storage
+        localStorage.setItem('favorites', JSON.stringify(favoriets));
+    }
 }

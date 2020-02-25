@@ -1,4 +1,4 @@
-export function renderPost(post, options = {}) {
+export function renderPost(post, options = { post, options }) {
     const tag = post.type === 'news' ?
         '<li class="tag tag-blue tag-rounded">Новость</li>' :
         '<li class="tag tag-rounded">Заметка</li>';
